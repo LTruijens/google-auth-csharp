@@ -1,0 +1,46 @@
+﻿<Window x:Class="GoogleAuthenticator.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:l="clr-namespace:GoogleAuthenticator"
+        Title="MainWindow" Height="400" Width="425">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="Auto" />
+            <ColumnDefinition Width="Auto" />
+        </Grid.ColumnDefinitions>
+
+        <TextBlock Margin="3">Identity</TextBlock>
+        <TextBox Grid.Column="1" Margin="3" FontFamily="Courier New" Text="{Binding Identity, UpdateSourceTrigger=PropertyChanged}" />
+
+        <TextBlock Grid.Row="1" Margin="3">Secret</TextBlock>
+        <TextBox Grid.Row="1" Grid.Column="1" Margin="3" FontFamily="Courier New" Text="{Binding Secret, UpdateSourceTrigger=PropertyChanged, Converter={l:BytesToStringConverter}}" />
+
+        <TextBlock Grid.Row="2" Margin="3">QR code</TextBlock>
+        <Image Grid.Row="2" Grid.Column="1" Margin="3" Source="{Binding QRCodeUrl}" Width="200" Height="200" />
+
+        <TextBlock Grid.Row="3" Margin="3">Timestamp</TextBlock>
+        <TextBlock Grid.Row="3" Grid.Column="1" Margin="3" Text="{Binding Timestamp}" FontFamily="Courier New" />
+
+        <TextBlock Grid.Row="4" Margin="3">Hmac</TextBlock>
+        <StackPanel Grid.Row="4" Grid.Column="1" Margin="3" Orientation="Horizontal">
+            <TextBlock Text="{Binding HmacPart1, Converter={l:BytesToStringConverter}}" FontFamily="Courier New" />
+            <TextBlock Text="{Binding HmacPart2, Converter={l:BytesToStringConverter}}" FontFamily="Courier New" Background="Green" Foreground="White" />
+            <TextBlock Text="{Binding HmacPart3, Converter={l:BytesToStringConverter}}" FontFamily="Courier New" />
+        </StackPanel>
+
+        <TextBlock Grid.Row="5" Margin="3">One-time password</TextBlock>
+        <TextBlock Grid.Row="5" Grid.Column="1" Margin="3" Text="{Binding OneTimePassword, StringFormat={}{0:000000}}" FontFamily="Courier New" Background="Green" Foreground="White" HorizontalAlignment="Left" />
+
+        <TextBlock Grid.Row="6" Margin="3">Seconds to go</TextBlock>
+        <TextBlock Grid.Row="6" Grid.Column="1" Margin="3" Text="{Binding SecondsToGo}" />
+    </Grid>
+</Window>
