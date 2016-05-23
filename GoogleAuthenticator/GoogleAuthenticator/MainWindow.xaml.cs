@@ -57,12 +57,18 @@ namespace GoogleAuthenticator
             set { _identity = value; OnPropertyChanged("Identity"); OnPropertyChanged("QRCodeUrl"); CalculateOneTimePassword(); }
         }
 
+        public string SecretBase32
+        {
+            get { return Base32.ToString(Secret); }
+            set { try { Secret = Base32.ToBytes(value); } catch { }; OnPropertyChanged("SecretBase32"); }
+        }
+
         private byte[] _secret;
 
         public byte[] Secret
         {
             get { return _secret; }
-            set { _secret = value; OnPropertyChanged("Secret"); OnPropertyChanged("QRCodeUrl"); CalculateOneTimePassword(); }
+            set { _secret = value; OnPropertyChanged("Secret"); OnPropertyChanged("QRCodeUrl"); CalculateOneTimePassword(); OnPropertyChanged("SecretBase32"); }
         }
 
         public string QRCodeUrl
@@ -120,8 +126,7 @@ namespace GoogleAuthenticator
         private string GetQRCodeUrl()
         {
             // https://code.google.com/p/google-authenticator/wiki/KeyUriFormat
-            var base32Secret = Base32.Encode(Secret);
-            return String.Format("https://www.google.com/chart?chs=200x200&chld=M|0&cht=qr&chl=otpauth://totp/{0}%3Fsecret%3D{1}", Identity, base32Secret);            
+            return String.Format("https://www.google.com/chart?chs=200x200&chld=M|0&cht=qr&chl=otpauth://totp/{0}%3Fsecret%3D{1}", Identity, SecretBase32);            
         }
 
         private void CalculateOneTimePassword()
