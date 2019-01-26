@@ -114,4 +114,10 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="Base32_CharToValue_Character_is_not_a_Base32_character_" xml:space="preserve">
+    <value>Character is not a Base32 character.</value>
+  </data>
+  <data name="Base32_ValueToChar_Byte_is_not_a_value_Base32_value_" xml:space="preserve">
+    <value>Byte is not a value Base32 value.</value>
+  </data>
 </root>
